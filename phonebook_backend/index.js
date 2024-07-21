@@ -22,6 +22,11 @@ let persons = [
       id: "4",
       name: "Mary Poppendieck", 
       number: "39-23-6423122"
+    },
+    { 
+        id: "5",
+        name: "hugh", 
+        number: "7361891732"
     }
 ]
 app.get('/',(req,res) => {
@@ -65,9 +70,15 @@ app.delete('/api/persons/:id',(req,res)=>{
 
 app.post('/api/persons',(req,res)=>{
     const body = req.body   
-    if(!body.name){
+    if(!body.name || !body.number){
         return res.status(400).end(JSON.stringify({
-            error : " Name is missing"
+            error : " Name or Number is missing"
+        }))
+    }
+    const found = persons.find(p => p.name.toLowerCase() === body.name)
+    if(found){
+        return res.status(400).end(JSON.stringify({
+            error : "Name must be unique"
         }))
     }
     const person  = {
