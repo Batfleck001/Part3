@@ -49,6 +49,14 @@ app.get('/api/persons/:id',(req,res) => {
     }
 })
 
+app.delete('/api/persons/:id',(req,res)=>{
+    const id = req.params.id
+    persons = persons.filter(p => p.id !== id)
+    res.status(204).end()
+})
+
+
+
 
 // const Idgenerator = () =>{
 //     const maxId = persons.length> 0 ? Math.max(...persons.map(p => p.id)) : 0
