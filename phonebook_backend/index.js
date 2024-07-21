@@ -63,22 +63,22 @@ app.delete('/api/persons/:id',(req,res)=>{
 //     return String(maxId + 1)
 // }
 
-// app.post('/api/persons',(req,res)=>{
-//     const body = req.body   
-//     if(!body.name){
-//         return res.status(400).end(JSON.stringify({
-//             error : " Name is missing"
-//         }))
-//     }
-//     const person  = {
-//         name : body.name,
-//         number: body.number,
-//         id : Idgenerator()
-//     }
-//     persons = persons.concat(person)
-//     console.log(person)
-//     res.json(person)
-// })
+app.post('/api/persons',(req,res)=>{
+    const body = req.body   
+    if(!body.name){
+        return res.status(400).end(JSON.stringify({
+            error : " Name is missing"
+        }))
+    }
+    const person  = {
+        name : body.name,
+        number: body.number,
+        id : String(Math.floor(Math.random() * 10000000))
+    }
+    persons = persons.concat(person)
+    console.log(person)
+    res.json(person)
+})
 
 
 
