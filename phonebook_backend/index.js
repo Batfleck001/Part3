@@ -36,6 +36,19 @@ app.get('/info',(req,res)=>{
     res.send(`<p>Phone Book has info for ${persons.length} people <br/> ${Date()}</p>`)
 })
 
+app.get('/api/persons/:id',(req,res) => {
+    const id = req.params.id
+    const person = persons.find(p => p.id === id)
+    if(person){
+        res.send(person)
+    }
+    else{
+        res.status(400).end(JSON.stringify({
+            error : "No such ID"
+        }))
+    }
+})
+
 
 // const Idgenerator = () =>{
 //     const maxId = persons.length> 0 ? Math.max(...persons.map(p => p.id)) : 0
